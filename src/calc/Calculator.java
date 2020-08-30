@@ -1,17 +1,33 @@
 package calc;
 
+import com.sun.javafx.collections.VetoableListDecorator;
+
 import java.util.Scanner;
 
 public class Calculator {
+
+    Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-        int num1, num2, result;
+        int num1 = getInt();
+        int num2 = getInt();
         char operation;
-        System.out.println("Ответ: " + operation);
+        int result;
+        System.out.println("Ответ: " + result);
+    }
 
-        System.out.print("Введите первое число: ");
-        num1 = scanner.nextInt();
+    public static int getInt() {
+        System.out.print("Введите первое целое число: ");
+        int num;
+        if (scanner.hasNext()) {
+            num = scanner.nextInt();
+        } else {
+            System.out.println("Вы ввели не целое цисло!");
+            num = getInt();
+        }
+        return num;
+    }
+
 
         System.out.print("Введите действие из предложенных(+, -, * или /): ");
         if (scanner.hasNext()) {
@@ -38,5 +54,5 @@ public class Calculator {
                 break;
         }
         return result;
-    }
+
 }
