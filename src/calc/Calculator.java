@@ -8,19 +8,20 @@ public class Calculator {
 
     public static void main(String[] args) {
         float num1 = getFloat();
-        float num2 = getFloat();
         char operation = getOperation();
-        float result;
+        float num2 = getFloat();
+        float result = Calc(num1,num2,operation);
         System.out.println("Ответ: " + result);
     }
 
     public static float getFloat() {
-        System.out.print("Введите первое число: ");
+        System.out.print("Введите число: ");
         float num;
-        if (scanner.hasNext()) {
+        if (scanner.hasNextFloat()) {
             num = scanner.nextFloat();
         } else {
             System.out.print("Вы ввели не число!");
+            scanner.next();
             num = getFloat();
         }
         return num;
@@ -33,29 +34,31 @@ public class Calculator {
             operation = scanner.next().charAt(0);
         } else {
             System.out.print("Выбрали не то действие!");
+            scanner.next();
             operation = getOperation();
         }
         return operation;
     }
 
-
-
-
-
-        switch () {
-            case "+":
-                result = num1 + num2;
+    public static float Calc(float num1,float num2,char operation) {
+        float res;
+        switch (operation) {
+            case '+':
+                res = num1 + num2;
                 break;
-            case "-":
-                result = num1 - num2;
+            case '-':
+                res = num1 - num2;
                 break;
-            case "*":
-                result = num1 * num2;
+            case '*':
+                res = num1 * num2;
                 break;
-            case "/":
-                result = num1 / num2;
+            case '/':
+                res = num1 / num2;
                 break;
+            default:
+                System.out.println("Неверная операция!");
+                res = Calc(num1,num2,getOperation());
         }
-        return result;
-
+        return res;
+    }
 }
